@@ -37,54 +37,81 @@ var template = React.createElement(
     )
 );
 
-var count = 0;
+var onFormSubmit = function onFormSubmit(e) {
+    e.preventDefault();
 
-var addOne = function addOne() {
-    count++;
-    console.log("+1");
-    renderCounterApp();
-};
-var subOne = function subOne() {
-    count--;
-    console.log("-1");
-    renderCounterApp();
-};
-var resetBtn = function resetBtn() {
-    count = 0;
-    console.log("Reset");
-    renderCounterApp();
+    var option = e.target.elements.option.value;
+
+    if (option) {
+        book.options.push(option);
+        console.log(book.options);
+        e.target.option.value = "";
+        renderBook();
+    }
 };
 
+var resetOnClick = function resetOnClick() {
+    book.options = [];
+    renderBook();
+};
+
+var book = {
+    title: "The great adventures",
+    subtitle: "of the small Mongo",
+    options: [1, 2, 3, 4, 5]
+};
 var appRoot = document.getElementById('app');
 
-var renderCounterApp = function renderCounterApp() {
-    var template2 = React.createElement(
+var renderBook = function renderBook() {
+
+    var template3 = React.createElement(
         "div",
         null,
-        React.createElement(
+        book.subtitle && React.createElement(
             "h1",
             null,
-            "Count: ",
-            count,
-            " "
+            book.title.toUpperCase()
+        ),
+        book.subtitle && React.createElement(
+            "p",
+            null,
+            book.subtitle
+        ),
+        React.createElement(
+            "p",
+            null,
+            book.options && book.options.length > 0 ? "Those are the options" : "No no no optios"
+        ),
+        React.createElement(
+            "form",
+            { onSubmit: onFormSubmit },
+            React.createElement("input", { type: "text", name: "option" }),
+            React.createElement(
+                "button",
+                null,
+                "Add Option"
+            ),
+            React.createElement(
+                "ol",
+                null,
+                book.options.map(function (option) {
+                    return React.createElement(
+                        "li",
+                        { key: option },
+                        "Option: ",
+                        option
+                    );
+                })
+            )
         ),
         React.createElement(
             "button",
-            { onClick: subOne },
-            "-1"
-        ),
-        React.createElement(
-            "button",
-            { onClick: resetBtn },
-            "RESET"
-        ),
-        React.createElement(
-            "button",
-            { onClick: addOne },
-            "+1"
+            { onClick: resetOnClick, name: "reset" },
+            "Clear all"
         )
     );
-    ReactDOM.render(template2, appRoot);
+
+    ReactDOM.render(template3, appRoot);
 };
 
-renderCounterApp();
+renderBook();
