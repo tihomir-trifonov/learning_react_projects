@@ -33,8 +33,8 @@ const resetOnClick = () => {
 }
 
 const book = {
-    title:"The great adventures",
-    subtitle:"of the small Mongo",
+    title:"The Bubi bu shupi su",
+    subtitle:"of the small Bubi Bu",
     options:[1,2,3,4,5]
 }
 const appRoot = document.getElementById('app');
