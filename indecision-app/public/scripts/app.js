@@ -56,7 +56,7 @@ var resetOnClick = function resetOnClick() {
 };
 
 var book = {
-    title: "The Bubi bu shupi su",
+    title: "The Bubi bu shupi susp",
     subtitle: "of the small Bubi Bu",
     options: [1, 2, 3, 4, 5]
 };

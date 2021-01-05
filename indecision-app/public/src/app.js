@@ -1,15 +1,15 @@
 console.log('App.js is running!');
 
 // JSX - JavaScript XML
-const template =(
+const template = (
     <div>
         <h1>This is JSX from app.js! aaaand changes</h1>
         <p>More info</p>
-            <ol>
-                <li> a</li>
-                <li> b</li>
-                <li> c</li>
-            </ol>
+        <ol>
+            <li> a</li>
+            <li> b</li>
+            <li> c</li>
+        </ol>
 
     </div>
 );
@@ -33,39 +33,35 @@ const resetOnClick = () => {
 }
 
 const book = {
-    title:"The Bubi bu shupi su",
-    subtitle:"of the small Bubi Bu",
-    options:[1,2,3,4,5]
+    title: "The Bubi bu shupi susp",
+    subtitle: "of the small Bubi Bu",
+    options: [1, 2, 3, 4, 5]
 }
 const appRoot = document.getElementById('app');
 
 
+const renderBook = () => {
 
-
-const renderBook = () =>  {
-
-    const template3 =(
+    const template3 = (
         <div>
-        {book.subtitle && <h1>{book.title.toUpperCase()}</h1>}
-        {book.subtitle && <p>{book.subtitle}</p>}
-        <p>{book.options && book.options.length > 0 ? "Those are the options" : "No no no optios"}</p>
-        
-        <form onSubmit={onFormSubmit}>
-        <input type="text" name="option" />
-        <button>Add Option</button>
-        <ol>{
-            book.options.map(
-                (option) => {
-                return <li key={option}>Option: {option}</li>
-            }
-            )
-        
-        }</ol>
+            {book.subtitle && <h1>{book.title.toUpperCase()}</h1>}
+            {book.subtitle && <p>{book.subtitle}</p>}
+            <p>{book.options && book.options.length > 0 ? "Those are the options" : "No no no optios"}</p>
 
-        </form>
-        <button onClick={resetOnClick} name="reset">Clear all</button>
-    </div>
-);
+            <form onSubmit={onFormSubmit}>
+                <input type="text" name="option" />
+                <button>Add Option</button>
+                <ol>{
+                    book.options.map(
+                        (option) => {
+                            return <li key={option}>Option: {option}</li>
+                        }
+                    )
+                }</ol>
+            </form>
+            <button onClick={resetOnClick} name="reset">Clear all</button>
+        </div>
+    );
 
     ReactDOM.render(template3, appRoot);
 }
