@@ -27,6 +27,13 @@ const onFormSubmit = (e) => {
     }
 }
 
+const onMakeDecision = () => {
+    const randomNum = Math.floor(Math.random()*book.options.length);
+    const option = book.options[randomNum];
+    alert(option)
+    renderBook()
+}
+
 const resetOnClick = () => {
     book.options = []
     renderBook()
@@ -35,7 +42,7 @@ const resetOnClick = () => {
 const book = {
     title: "The Bubi bu shupi susp",
     subtitle: "of the small Bubi Bu",
-    options: [1, 2, 3, 4, 5]
+    options: []
 }
 const appRoot = document.getElementById('app');
 
@@ -46,19 +53,20 @@ const renderBook = () => {
         <div>
             {book.subtitle && <h1>{book.title.toUpperCase()}</h1>}
             {book.subtitle && <p>{book.subtitle}</p>}
-            <p>{book.options && book.options.length > 0 ? "Those are the options" : "No no no optios"}</p>
+            <p>{book.options && book.options.length > 0 ? "Those are the options" : "No no, no optios"}</p>
+
+
 
             <form onSubmit={onFormSubmit}>
                 <input type="text" name="option" />
                 <button>Add Option</button>
                 <ol>{
                     book.options.map(
-                        (option) => {
-                            return <li key={option}>Option: {option}</li>
-                        }
+                        (option) => <li key={option}>Option: {option}</li>
                     )
                 }</ol>
             </form>
+            <button disabled={book.options.length < 2} onClick={onMakeDecision}>What shoud I do?</button>
             <button onClick={resetOnClick} name="reset">Clear all</button>
         </div>
     );

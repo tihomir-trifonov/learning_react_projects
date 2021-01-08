@@ -50,6 +50,13 @@ var onFormSubmit = function onFormSubmit(e) {
     }
 };
 
+var onMakeDecision = function onMakeDecision() {
+    var randomNum = Math.floor(Math.random() * book.options.length);
+    var option = book.options[randomNum];
+    alert(option);
+    renderBook();
+};
+
 var resetOnClick = function resetOnClick() {
     book.options = [];
     renderBook();
@@ -58,7 +65,7 @@ var resetOnClick = function resetOnClick() {
 var book = {
     title: "The Bubi bu shupi susp",
     subtitle: "of the small Bubi Bu",
-    options: [1, 2, 3, 4, 5]
+    options: []
 };
 var appRoot = document.getElementById('app');
 
@@ -80,7 +87,7 @@ var renderBook = function renderBook() {
         React.createElement(
             "p",
             null,
-            book.options && book.options.length > 0 ? "Those are the options" : "No no no optios"
+            book.options && book.options.length > 0 ? "Those are the options" : "No no, no optios"
         ),
         React.createElement(
             "form",
@@ -103,6 +110,11 @@ var renderBook = function renderBook() {
                     );
                 })
             )
+        ),
+        React.createElement(
+            "button",
+            { disabled: book.options.length < 2, onClick: onMakeDecision },
+            "What shoud I do?"
         ),
         React.createElement(
             "button",
