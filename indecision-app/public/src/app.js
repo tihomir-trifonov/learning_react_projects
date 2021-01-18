@@ -10,6 +10,29 @@ class IndecisionApp extends React.Component {
         }
     }
 
+    componentDidMount() {
+        try {
+            const storedOptions = JSON.parse(localStorage.getItem("options"))
+            if (storedOptions) {
+                this.setState(() => ({ options: storedOptions }))
+            }
+        } catch (e) {
+            // Do nothing
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState){
+        if (prevState.options.length !== this.state.options.length) {
+        console.log("saving data")
+        const json = JSON.stringify(this.state.options)
+        localStorage.setItem("options" , json)
+        }
+    }
+
+    componentWillUnmount(){
+        console.log("component will unmount")
+    }
+
     handleDeleteAllOptions() {
         this.setState(() => ({ options:[]}))
     }
@@ -148,6 +171,7 @@ const Options = (props) => {
                     />
                 ))}
             </ul>
+            { props.options.length === 0 && <p>Add options below to be able to make a choice</p>}
             <button onClick={props.handleDeleteAllOptions}>Remove all</button>
         </div>
     )
@@ -190,11 +214,14 @@ class AddOption extends React.Component {
         const newOption = e.target.elements.newOption.value.trim()
         const error = this.props.handleAddOption(newOption)
         this.setState(() => ({ error }))
+        if (!error){
+            e.target.elements.newOption.value = ""
+        }
     }
     render() {
         return (
             <div>
-                <p>Code adding options here</p>
+                <p>Add more options here</p>
                 {this.state.error && <p>{this.state.error}</p>}
                 <form onSubmit={this.handleAddOption}>
                     <input type="text" name="newOption"></input>
