@@ -3,16 +3,49 @@ import AddOption from "./AddOption.js";
 import Header from "./Header.js";
 import Action from "./Action.js";
 import Options from "./Options.js";
+import OptionModal from "./OptionModal";
 
 class IndecisionApp extends React.Component {
-    constructor(props) {
-        super(props)
-        this.handleDeleteAllOptions = this.handleDeleteAllOptions.bind(this)
-        this.handlePick = this.handlePick.bind(this)
-        this.handleAddOption = this.handleAddOption.bind(this)
-        this.handleDeleteOptionSingular = this.handleDeleteOptionSingular.bind(this)
-        this.state = {
-            options: props.options
+    state = {
+            options: [],
+            selectedOption: undefined
+    }
+
+    handleDeleteAllOptions=()=>{
+        this.setState(() => ({ options:[]}))
+    }
+
+    handleClearSelectedOption=()=>{
+        this.setState(() => ({ selectedOption:undefined}))
+    }
+
+    handleDeleteOptionSingular=(optionToRemove)=>{
+        this.setState(
+            (prevState) => ({
+                options: prevState.options.filter((option) => optionToRemove !== option)
+            })
+        )
+    }
+
+    handlePick=()=>{
+        const randomNum = Math.floor(Math.random() * this.state.options.length)
+        const option = this.state.options[randomNum]
+        this.setState(
+            () => ({
+                selectedOption: option
+            })
+        )
+        console.log(this.state.selectedOption)
+        // alert(this.state.options[Math.floor(Math.random() * this.state.options.length)])
+    }
+
+    handleAddOption=(option)=>{
+        if (!option) {
+            return "Enter valid item"
+        } else if (this.state.options.indexOf(option) > -1) {
+            return "Item already in list"
+        } else {
+            this.setState((prevState) => ({ options: prevState.options.concat([option]) }))
         }
     }
 
@@ -39,31 +72,6 @@ class IndecisionApp extends React.Component {
         console.log("component will unmount")
     }
 
-    handleDeleteAllOptions() {
-        this.setState(() => ({ options:[]}))
-    }
-
-    handleDeleteOptionSingular(optionToRemove) {
-        this.setState(
-            (prevState) => ({
-                options: prevState.options.filter((option) => optionToRemove !== option)
-            })
-        )
-    }
-
-    handlePick() {
-        alert(this.state.options[Math.floor(Math.random() * this.state.options.length)])
-    }
-
-    handleAddOption(option) {
-        if (!option) {
-            return "Enter valid item"
-        } else if (this.state.options.indexOf(option) > -1) {
-            return "Item already in list"
-        } else {
-            this.setState((prevState) => ({ options: prevState.options.concat([option]) }))
-        }
-    }
 
     render() {
         const subTitle = "You let a PC choose for you"
@@ -83,6 +91,10 @@ class IndecisionApp extends React.Component {
                 />
                 <AddOption
                     handleAddOption={this.handleAddOption}
+                />
+                <OptionModal
+                    selectedOption={this.state.selectedOption}
+                    handleClearSelectedOption={this.handleClearSelectedOption}
                 />
             </div>
         )

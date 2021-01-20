@@ -3,8 +3,7 @@ import Option from "./Option.js";
 
 
 
-const Options = (props) => {
-    return (
+const Options = (props) =>(
         <div>
             <p>Options come here as a list below</p>
             <p>there are exactly {props.options.length} options to choose from</p>
@@ -20,8 +19,8 @@ const Options = (props) => {
             { props.options.length === 0 && <p>Add options below to be able to make a choice</p>}
             <button onClick={props.handleDeleteAllOptions}>Remove all</button>
         </div>
-    )
-}
+)
+
 
 export {Options as default}
 
