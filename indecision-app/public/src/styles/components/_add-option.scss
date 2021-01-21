@@ -1,0 +1,45 @@
+.add-option{
+    background: lighten($background_dark, 5%);
+    display: flex;
+    padding: $m_size;
+    flex-direction: column;
+
+}
+
+.add-option__input{
+    flex-grow: 1;
+    background: $background_light;
+    color: $text_off_white_light;
+    padding: $s_size;
+    font-size: $m_size;
+    font-weight: 500;
+    border-bottom: .3rem solid darken($button_color, 10%);
+    margin: 0 0 $s_size 0;
+}
+
+.add-option-error{
+    color: lighten($button_redish, 7.5%);
+    font-style: italic;
+    margin: $m_size 0 0 0;
+    padding: 0 $m_size;
+    font-weight: 700;
+}
+
+@media (min-width: $desktop_break_point) {
+    *{
+        .add-option {
+            flex-direction: row;
+        }
+        .add-option__input{
+            // padding: 0 $s_size;
+            border-bottom: .3rem solid darken($button_color, 10%);
+            margin: 0 $s_size 0 0;
+
+        }
+
+        .big-button {
+            margin-bottom: $m_size;
+        }
+
+    }
+}

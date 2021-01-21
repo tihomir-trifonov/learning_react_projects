@@ -1,0 +1,28 @@
+.header {
+    background: $background_dark;
+    color: #f0f5f7f6;
+    margin-bottom: $m_size;
+    padding: $m_size 0;
+    // text-align: center;
+}
+
+// BEM block element modifier naming convention
+.header__title {
+    color: $text_off_white_light;
+    font-size: $l_size;
+        margin: 0;
+}
+.header__subtitle {
+    color: $text_off_white;
+    font-size: $m_size;
+    font-weight: 500;
+    margin: 0;
+}
+
+@media (min-width: $desktop_break_point) {
+    *{
+        .header {
+            margin-bottom: $xl_size;
+        }
+    }
+}
