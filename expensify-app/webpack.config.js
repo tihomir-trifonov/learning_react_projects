@@ -2,7 +2,8 @@ const path = require('path')
 
 module.exports = {
 
-    entry: path.join(__dirname,'public','src','app.js'),
+    // entry: path.join(__dirname,'public','src','app.js'),
+    entry: path.join(__dirname,'public','src','playground','redux-expensify.js'),
 
     output: {
         path:path.join(__dirname,'public', '/'),
