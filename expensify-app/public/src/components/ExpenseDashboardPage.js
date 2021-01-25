@@ -1,9 +1,12 @@
 import React from "react";
+import ConnectExpenseList from "./ExpenseList";
+import ExpenseListFilters from "./ExpenseListFilters";
 
 const ExpenseDashboardPage = () => (
     <div>
-        Dashboard page!
+        <ExpenseListFilters/>
+        <ConnectExpenseList/>
     </div>
 );
 
-export default ExpenseDashboardPage
+export default ExpenseDashboardPage;
