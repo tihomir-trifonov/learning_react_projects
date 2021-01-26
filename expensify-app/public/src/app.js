@@ -9,6 +9,8 @@ import {addExpense} from "./actions/expenses"
 // import {setStartDate, setEndDate, setTextFilter, sortByAmount, sortByDate} from "./actions/filters"
 import getVisibleExpenses from "./selectors/expenses"
 
+
+
 const store = configureStore()
 
 store.dispatch(addExpense({ description: "1 Water bill", amount: 3, createdAt: 1611582159621 }))
@@ -19,7 +21,6 @@ store.dispatch(addExpense({ description: "4 Rent", amount: 44, createdAt: 161096
 
 const state = store.getState()
 const visibleExpenses = getVisibleExpenses(state.expenses, state.filters)
-console.log(visibleExpenses)
 
 const jsx = (
     <Provider store={store}>
